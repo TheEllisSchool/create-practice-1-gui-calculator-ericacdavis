@@ -30,6 +30,7 @@ public class CalculatorGUI extends JFrame {
         setTitle("Calculator");
         setSize(200, 200);
         setResizable(true);
+        getContentPane().setBackground(Color.black);
         setLocationRelativeTo(null);
         
         
@@ -39,18 +40,19 @@ public class CalculatorGUI extends JFrame {
 	private void initGUI() {
 		
 			
-		JLabel titleLabel = new JLabel("Calculator");
+		JLabel titleLabel = new JLabel("Your Favorite Calculator");
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         Font titleFont = new Font(Font.SERIF, Font.PLAIN, 32);
         titleLabel.setFont(titleFont);
         add(titleLabel, BorderLayout.PAGE_START);
-        
+        titleLabel.setForeground(Color.white);
         
         //number panel set-up
         JPanel numberInPanel = new JPanel();
         numberInPanel.setLayout(new GridLayout(2, 2));
         numberInPanel.setPreferredSize(new Dimension(250, 75));
         numberInPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        numberInPanel.setBackground(Color.blue);
         add(numberInPanel, BorderLayout.LINE_START);
         
         JLabel num1 = new JLabel("First Number: ");
@@ -70,11 +72,13 @@ public class CalculatorGUI extends JFrame {
         buttonPanel.setLayout(new GridLayout(2, 2));
         buttonPanel.setPreferredSize(new Dimension (300, 50));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        buttonPanel.setBackground(Color.pink);
         add(buttonPanel, BorderLayout.LINE_END);
         
         
         //average button set-up
         JButton averageBtn = new JButton("Average");
+        averageBtn.setBackground(Color.green);
         averageBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,6 +90,7 @@ public class CalculatorGUI extends JFrame {
         
         //factorial button set-up
         JButton factorialBtn = new JButton("Factorial");
+        factorialBtn.setBackground(Color.yellow);
         factorialBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +102,7 @@ public class CalculatorGUI extends JFrame {
         
         //higher number button set-up
         JButton higherBtn = new JButton("Higher");
+        higherBtn.setBackground(Color.orange);
         higherBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,6 +115,7 @@ public class CalculatorGUI extends JFrame {
         
       //percent change button set-up
         JButton perChangeBtn = new JButton("Percent Change");
+        perChangeBtn.setBackground(Color.red);
         perChangeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,6 +130,7 @@ public class CalculatorGUI extends JFrame {
         answer.setPreferredSize(new Dimension (500, 100));
         Font answerFont = new Font(Font.SERIF, Font.PLAIN, 20);
         answer.setFont(answerFont);
+        answer.setForeground(Color.white);
         add(answer, BorderLayout.PAGE_END);
        
         
@@ -130,18 +138,43 @@ public class CalculatorGUI extends JFrame {
 
 	private void calcHigher() {
 		// TODO Auto-generated method stub
+		double x = Double.parseDouble(in1.getText());
+		double y = Double.parseDouble(in2.getText());
+		double higher = 0;
+		if (x>y) {
+			higher = x;
+			answer.setText("The higher number is: " + higher);
+		} if (x==y) {
+			answer.setText("The numbers are equal");
+		}
+		if (y>x) {
+			higher =y;
+			answer.setText("The higher number is: " + higher);
+		}
 		
 	}
 
 	private void calcPerChange() {
 		// TODO Auto-generated method stub
-		
+		double x = Double.parseDouble(in1.getText());
+		double y = Double.parseDouble(in2.getText());
+		double perChange = (-(x-y))/x * 100;
+		answer.setText("The percent change is: " + perChange + "%");
 	}
 
 	private void calcFactorial() {
 		// TODO Auto-generated method stub
+		double x = Double.parseDouble(in1.getText());
+		double a = Math.round(x);
+		double factorial = 1;
+	       for (int i = 1; i <= a; i++) {
+	           factorial = factorial * i;
+	       }
+	       answer.setText("The factorial of your first number is " + factorial);
+			
+		}
 		
-	}
+	
 
 	private void calcAvg() {
 		double x = Double.parseDouble(in1.getText());
